@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EURORACK://CYBER-RACK_1997</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-trail" id="cursorTrail"></div>
+
+    <div class="bg-grid"></div>
+    <div class="bg-wave"></div>
+    <div class="scanline"></div>
+    <div class="laser"></div>
+
+    <header class="topbar glass">
+      <h1 class="glitch" data-text="EURORACK://CYBER-RACK_1997">EURORACK://CYBER-RACK_1997</h1>
+      <nav>
+        <a href="#hero">BOOT</a>
+        <a href="#modules">MODULES</a>
+        <a href="#flow">SIGNAL</a>
+        <a href="#playground">PLAY</a>
+        <a href="#basics">BASICS</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="hero" class="panel hero">
+        <h2>What is Eurorack?</h2>
+        <p>
+          Eurorack is an open modular synthesizer standard where you build your own instrument from
+          independent modules. Instead of one fixed synth architecture, you patch your own: signal
+          generators, tone shapers, timing logic, and control voltages.
+        </p>
+        <p>
+          Why everyone loves it: instant tactile control, unlimited reconfiguration, and that unique
+          blend of engineering + musical chaos. It feels like wiring a tiny cybernetic lab for sound.
+        </p>
+        <div class="hero-telemetry">
+          <div>FORMAT: 3U HEIGHT</div>
+          <div>WIDTH: HP UNITS</div>
+          <div>POWER: ±12V (and often +5V)</div>
+          <div>PATCH: 3.5mm TS CABLES</div>
+        </div>
+      </section>
+
+      <section id="modules" class="panel">
+        <h2>Core Modules: Your Sonic Building Blocks</h2>
+        <div class="module-grid">
+          <article class="module-card tiltable">
+            <h3>VCO // Oscillator</h3>
+            <p>The sound source. Creates sine, saw, square, and pulse waveforms.</p>
+            <p class="mini">Think: raw voltage tone engine.</p>
+          </article>
+          <article class="module-card tiltable">
+            <h3>VCF // Filter</h3>
+            <p>Removes or boosts frequencies. Low-pass is the classic subtractive voice.</p>
+            <p class="mini">Think: tone sculptor.</p>
+          </article>
+          <article class="module-card tiltable">
+            <h3>VCA // Amplifier</h3>
+            <p>Controls loudness via CV. Without VCA control, notes often drone forever.</p>
+            <p class="mini">Think: volume gate.</p>
+          </article>
+          <article class="module-card tiltable">
+            <h3>EG // Envelope</h3>
+            <p>Shapes evolution over time (attack/decay/sustain/release).</p>
+            <p class="mini">Think: motion contour.</p>
+          </article>
+          <article class="module-card tiltable">
+            <h3>LFO // Modulator</h3>
+            <p>Slow oscillator for motion: vibrato, wobble, rhythmic sweeps.</p>
+            <p class="mini">Think: automatic performer.</p>
+          </article>
+          <article class="module-card tiltable">
+            <h3>Sequencer</h3>
+            <p>Step-based control voltages and gates for melody and rhythm.</p>
+            <p class="mini">Think: patch brain.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="flow" class="panel">
+        <h2>Signal Flow // Animated Current</h2>
+        <p>
+          Classic path: VCO → VCF → VCA → OUTPUT. Modulators (LFO/EG) patch into parameters such as
+          cutoff and amplitude.
+        </p>
+        <svg class="flow-svg" viewBox="0 0 1000 240" preserveAspectRatio="none">
+          <rect x="40" y="80" width="170" height="80" rx="6"></rect>
+          <text x="125" y="128">VCO</text>
+          <rect x="290" y="80" width="170" height="80" rx="6"></rect>
+          <text x="375" y="128">VCF</text>
+          <rect x="540" y="80" width="170" height="80" rx="6"></rect>
+          <text x="625" y="128">VCA</text>
+          <rect x="790" y="80" width="170" height="80" rx="6"></rect>
+          <text x="875" y="128">OUT</text>
+          <path class="flux" d="M210,120 C250,40 250,200 290,120"></path>
+          <path class="flux" d="M460,120 C500,40 500,200 540,120"></path>
+          <path class="flux" d="M710,120 C750,40 750,200 790,120"></path>
+        </svg>
+      </section>
+
+      <section id="playground" class="panel">
+        <h2>Patch Playground // Drag Cables, Hear Routing</h2>
+        <p>
+          Drag from output jacks to input jacks. Routing changes in real time in Web Audio. Start
+          audio, then patch like a mini modular.
+        </p>
+
+        <div class="play-layout">
+          <div class="synth-mod tiltable" id="mod-vco">
+            <h3>VCO</h3>
+            <label>Frequency <input type="range" id="vcoFreq" min="60" max="1200" value="220" /></label>
+            <div class="knob-wrap">
+              <button class="knob" data-target="vcoFreq" aria-label="VCO fine tune"></button>
+            </div>
+            <div class="jack-row">
+              <button class="jack output" data-jack="vcoOut">OUT</button>
+            </div>
+          </div>
+
+          <div class="synth-mod tiltable" id="mod-lfo">
+            <h3>LFO</h3>
+            <label>Rate <input type="range" id="lfoRate" min="0.1" max="20" step="0.1" value="3" /></label>
+            <div class="jack-row">
+              <button class="jack output" data-jack="lfoOut">OUT</button>
+            </div>
+          </div>
+
+          <div class="synth-mod tiltable" id="mod-vcf">
+            <h3>VCF</h3>
+            <label>Cutoff <input type="range" id="cutoff" min="80" max="5000" value="1400" /></label>
+            <label>Resonance <input type="range" id="q" min="0.1" max="20" step="0.1" value="4" /></label>
+            <div class="knob-wrap">
+              <button class="knob" data-target="cutoff" aria-label="Cutoff control"></button>
+            </div>
+            <div class="jack-row">
+              <button class="jack input" data-jack="vcfIn">IN</button>
+              <button class="jack input" data-jack="cutoffCv">CV</button>
+              <button class="jack output" data-jack="vcfOut">OUT</button>
+            </div>
+          </div>
+
+          <div class="synth-mod tiltable" id="mod-vca">
+            <h3>VCA</h3>
+            <label>Level <input type="range" id="amp" min="0" max="1" step="0.01" value="0.25" /></label>
+            <div class="jack-row">
+              <button class="jack input" data-jack="vcaIn">IN</button>
+              <button class="jack output" data-jack="vcaOut">OUT</button>
+            </div>
+          </div>
+
+          <div class="synth-mod tiltable" id="mod-out">
+            <h3>OUTPUT</h3>
+            <button id="audioToggle">START AUDIO</button>
+            <p id="routingText">Routing: idle</p>
+            <div class="jack-row">
+              <button class="jack input" data-jack="outIn">IN</button>
+            </div>
+          </div>
+        </div>
+
+        <svg id="patchSvg" class="patch-svg"></svg>
+      </section>
+
+      <section id="basics" class="panel split">
+        <div class="terminal glass">
+          <h2>Case + Power Basics</h2>
+          <ul>
+            <li><strong>HP:</strong> Horizontal Pitch. Plan width carefully.</li>
+            <li><strong>Current budget:</strong> Sum module mA on +12V/-12V/+5V rails.</li>
+            <li><strong>Headroom:</strong> Keep ~25% spare for stability and future modules.</li>
+            <li><strong>Depth:</strong> Skiffs need shallow modules.</li>
+          </ul>
+        </div>
+        <div class="terminal glass">
+          <h2>Glossary</h2>
+          <dl>
+            <dt>CV</dt>
+            <dd>Control Voltage; modulation data as voltage.</dd>
+            <dt>Gate</dt>
+            <dd>On/off control pulse, typically for note duration.</dd>
+            <dt>Trigger</dt>
+            <dd>Short pulse used to fire an event.</dd>
+            <dt>Attenuverter</dt>
+            <dd>Scales and optionally inverts incoming modulation.</dd>
+          </dl>
+        </div>
+      </section>
+    </main>
+
+    <footer class="panel foot">SYSTEM READY // PATCH, MODULATE, EVOLVE</footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
